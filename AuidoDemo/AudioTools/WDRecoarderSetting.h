@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface WDRecoarderSetting : NSObject
-@property (nonatomic,assign) float audioSampleRate;
+@property (nonatomic,assign) float audioSampleRate;//声音的采样率
+@property (nonatomic,assign) NSInteger chanels;//
+
 @end

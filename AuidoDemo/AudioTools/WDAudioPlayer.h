@@ -16,7 +16,8 @@ typedef enum : NSUInteger {
     WDAudioPlayerIdle,//空闲
     WDAudioPlayerBuffering,//缓冲
     WDAudioPlayerStop,//停止
-    WDAudioPlayerPlaying,//播放状态
+    WDAudioPlayerPlaying,//播放状态,
+    WDAudioPlayerFinished,//播放结束
     WDAudioPlayerError
 } WDAudioPlayerStatus;
 
@@ -38,6 +39,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,weak) id<WDAudioPlayerDelegate>delegate;
 
 @property (nonatomic,assign,readonly)WDAudioPlayerStatus status;
+
+@property (nonatomic,assign) CGFloat volume;  //default 0.5; 声音
 
 - (void)nextAudio;
 
