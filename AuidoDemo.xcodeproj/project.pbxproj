@@ -15,11 +15,14 @@
 		75E1C20F1FC570640097DDB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C20E1FC570640097DDB9 /* main.m */; };
 		75E1C2191FC570640097DDB9 /* AuidoDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2181FC570640097DDB9 /* AuidoDemoTests.m */; };
 		75E1C2241FC570640097DDB9 /* AuidoDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2231FC570640097DDB9 /* AuidoDemoUITests.m */; };
-		75E1C2331FC570BB0097DDB9 /* WDRecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2321FC570BB0097DDB9 /* WDRecoder.m */; };
-		75E1C2361FC570D10097DDB9 /* WDAuidoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2351FC570D10097DDB9 /* WDAuidoEncoder.m */; };
-		75E1C2391FC570DE0097DDB9 /* WDAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2381FC570DE0097DDB9 /* WDAudioDecoder.m */; };
-		75E1C23C1FC570FE0097DDB9 /* WDAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C23B1FC570FE0097DDB9 /* WDAudioPlayer.m */; };
-		75E1C23F1FC571160097DDB9 /* WDAudioPlayerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C23E1FC571160097DDB9 /* WDAudioPlayerItem.m */; };
+		75E1C2591FC5785F0097DDB9 /* WDAudioSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C24B1FC5785F0097DDB9 /* WDAudioSession.m */; };
+		75E1C25A1FC5785F0097DDB9 /* WDAuidoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C24E1FC5785F0097DDB9 /* WDAuidoEncoder.m */; };
+		75E1C25B1FC5785F0097DDB9 /* WDAudioPlayerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2501FC5785F0097DDB9 /* WDAudioPlayerItem.m */; };
+		75E1C25C1FC5785F0097DDB9 /* WDRecoarderSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2521FC5785F0097DDB9 /* WDRecoarderSetting.m */; };
+		75E1C25D1FC5785F0097DDB9 /* WDAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2551FC5785F0097DDB9 /* WDAudioPlayer.m */; };
+		75E1C25E1FC5785F0097DDB9 /* WDAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2571FC5785F0097DDB9 /* WDAudioDecoder.m */; };
+		75E1C25F1FC5785F0097DDB9 /* WDRecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2581FC5785F0097DDB9 /* WDRecoder.m */; };
+		75E1C2621FC578CB0097DDB9 /* WDAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2611FC578CB0097DDB9 /* WDAudioStreamer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,19 +59,25 @@
 		75E1C21F1FC570640097DDB9 /* AuidoDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuidoDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E1C2231FC570640097DDB9 /* AuidoDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuidoDemoUITests.m; sourceTree = "<group>"; };
 		75E1C2251FC570640097DDB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75E1C2311FC570BB0097DDB9 /* WDRecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDRecoder.h; sourceTree = "<group>"; };
-		75E1C2321FC570BB0097DDB9 /* WDRecoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDRecoder.m; sourceTree = "<group>"; };
-		75E1C2341FC570D10097DDB9 /* WDAuidoEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAuidoEncoder.h; sourceTree = "<group>"; };
-		75E1C2351FC570D10097DDB9 /* WDAuidoEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAuidoEncoder.m; sourceTree = "<group>"; };
-		75E1C2371FC570DE0097DDB9 /* WDAudioDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioDecoder.h; sourceTree = "<group>"; };
-		75E1C2381FC570DE0097DDB9 /* WDAudioDecoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioDecoder.m; sourceTree = "<group>"; };
-		75E1C23A1FC570FE0097DDB9 /* WDAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioPlayer.h; sourceTree = "<group>"; };
-		75E1C23B1FC570FE0097DDB9 /* WDAudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioPlayer.m; sourceTree = "<group>"; };
-		75E1C23D1FC571160097DDB9 /* WDAudioPlayerItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioPlayerItem.h; sourceTree = "<group>"; };
-		75E1C23E1FC571160097DDB9 /* WDAudioPlayerItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioPlayerItem.m; sourceTree = "<group>"; };
 		75E1C2411FC571FB0097DDB9 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		75E1C2421FC571FB0097DDB9 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		75E1C2431FC571FB0097DDB9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		75E1C24B1FC5785F0097DDB9 /* WDAudioSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioSession.m; sourceTree = "<group>"; };
+		75E1C24C1FC5785F0097DDB9 /* WDRecoarderSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDRecoarderSetting.h; sourceTree = "<group>"; };
+		75E1C24D1FC5785F0097DDB9 /* WDAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioPlayer.h; sourceTree = "<group>"; };
+		75E1C24E1FC5785F0097DDB9 /* WDAuidoEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAuidoEncoder.m; sourceTree = "<group>"; };
+		75E1C24F1FC5785F0097DDB9 /* WDAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioDecoder.h; sourceTree = "<group>"; };
+		75E1C2501FC5785F0097DDB9 /* WDAudioPlayerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioPlayerItem.m; sourceTree = "<group>"; };
+		75E1C2511FC5785F0097DDB9 /* WDRecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDRecoder.h; sourceTree = "<group>"; };
+		75E1C2521FC5785F0097DDB9 /* WDRecoarderSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDRecoarderSetting.m; sourceTree = "<group>"; };
+		75E1C2531FC5785F0097DDB9 /* WDAudioSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioSession.h; sourceTree = "<group>"; };
+		75E1C2541FC5785F0097DDB9 /* WDAuidoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAuidoEncoder.h; sourceTree = "<group>"; };
+		75E1C2551FC5785F0097DDB9 /* WDAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioPlayer.m; sourceTree = "<group>"; };
+		75E1C2561FC5785F0097DDB9 /* WDAudioPlayerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioPlayerItem.h; sourceTree = "<group>"; };
+		75E1C2571FC5785F0097DDB9 /* WDAudioDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioDecoder.m; sourceTree = "<group>"; };
+		75E1C2581FC5785F0097DDB9 /* WDRecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDRecoder.m; sourceTree = "<group>"; };
+		75E1C2601FC578CB0097DDB9 /* WDAudioStreamer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioStreamer.h; sourceTree = "<group>"; };
+		75E1C2611FC578CB0097DDB9 /* WDAudioStreamer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioStreamer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,20 +129,11 @@
 		75E1C1FE1FC570640097DDB9 /* AuidoDemo */ = {
 			isa = PBXGroup;
 			children = (
+				75E1C24A1FC5785F0097DDB9 /* AudioTools */,
 				75E1C1FF1FC570640097DDB9 /* AppDelegate.h */,
 				75E1C2001FC570640097DDB9 /* AppDelegate.m */,
 				75E1C2021FC570640097DDB9 /* ViewController.h */,
 				75E1C2031FC570640097DDB9 /* ViewController.m */,
-				75E1C2311FC570BB0097DDB9 /* WDRecoder.h */,
-				75E1C2321FC570BB0097DDB9 /* WDRecoder.m */,
-				75E1C2341FC570D10097DDB9 /* WDAuidoEncoder.h */,
-				75E1C2351FC570D10097DDB9 /* WDAuidoEncoder.m */,
-				75E1C2371FC570DE0097DDB9 /* WDAudioDecoder.h */,
-				75E1C2381FC570DE0097DDB9 /* WDAudioDecoder.m */,
-				75E1C23A1FC570FE0097DDB9 /* WDAudioPlayer.h */,
-				75E1C23B1FC570FE0097DDB9 /* WDAudioPlayer.m */,
-				75E1C23D1FC571160097DDB9 /* WDAudioPlayerItem.h */,
-				75E1C23E1FC571160097DDB9 /* WDAudioPlayerItem.m */,
 				75E1C2051FC570640097DDB9 /* Main.storyboard */,
 				75E1C2081FC570640097DDB9 /* Assets.xcassets */,
 				75E1C20A1FC570640097DDB9 /* LaunchScreen.storyboard */,
@@ -169,6 +169,29 @@
 				75E1C2411FC571FB0097DDB9 /* CoreAudio.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75E1C24A1FC5785F0097DDB9 /* AudioTools */ = {
+			isa = PBXGroup;
+			children = (
+				75E1C2601FC578CB0097DDB9 /* WDAudioStreamer.h */,
+				75E1C2611FC578CB0097DDB9 /* WDAudioStreamer.m */,
+				75E1C2531FC5785F0097DDB9 /* WDAudioSession.h */,
+				75E1C24B1FC5785F0097DDB9 /* WDAudioSession.m */,
+				75E1C24C1FC5785F0097DDB9 /* WDRecoarderSetting.h */,
+				75E1C24E1FC5785F0097DDB9 /* WDAuidoEncoder.m */,
+				75E1C24F1FC5785F0097DDB9 /* WDAudioDecoder.h */,
+				75E1C2501FC5785F0097DDB9 /* WDAudioPlayerItem.m */,
+				75E1C2511FC5785F0097DDB9 /* WDRecoder.h */,
+				75E1C2521FC5785F0097DDB9 /* WDRecoarderSetting.m */,
+				75E1C2541FC5785F0097DDB9 /* WDAuidoEncoder.h */,
+				75E1C24D1FC5785F0097DDB9 /* WDAudioPlayer.h */,
+				75E1C2551FC5785F0097DDB9 /* WDAudioPlayer.m */,
+				75E1C2561FC5785F0097DDB9 /* WDAudioPlayerItem.h */,
+				75E1C2571FC5785F0097DDB9 /* WDAudioDecoder.m */,
+				75E1C2581FC5785F0097DDB9 /* WDRecoder.m */,
+			);
+			path = AudioTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,14 +327,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75E1C2391FC570DE0097DDB9 /* WDAudioDecoder.m in Sources */,
-				75E1C2361FC570D10097DDB9 /* WDAuidoEncoder.m in Sources */,
+				75E1C25B1FC5785F0097DDB9 /* WDAudioPlayerItem.m in Sources */,
+				75E1C25C1FC5785F0097DDB9 /* WDRecoarderSetting.m in Sources */,
+				75E1C2591FC5785F0097DDB9 /* WDAudioSession.m in Sources */,
 				75E1C2041FC570640097DDB9 /* ViewController.m in Sources */,
-				75E1C2331FC570BB0097DDB9 /* WDRecoder.m in Sources */,
+				75E1C25F1FC5785F0097DDB9 /* WDRecoder.m in Sources */,
+				75E1C2621FC578CB0097DDB9 /* WDAudioStreamer.m in Sources */,
 				75E1C20F1FC570640097DDB9 /* main.m in Sources */,
 				75E1C2011FC570640097DDB9 /* AppDelegate.m in Sources */,
-				75E1C23C1FC570FE0097DDB9 /* WDAudioPlayer.m in Sources */,
-				75E1C23F1FC571160097DDB9 /* WDAudioPlayerItem.m in Sources */,
+				75E1C25A1FC5785F0097DDB9 /* WDAuidoEncoder.m in Sources */,
+				75E1C25D1FC5785F0097DDB9 /* WDAudioPlayer.m in Sources */,
+				75E1C25E1FC5785F0097DDB9 /* WDAudioDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
