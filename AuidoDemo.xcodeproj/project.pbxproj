@@ -25,7 +25,7 @@
 		75E1C2621FC578CB0097DDB9 /* WDAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2611FC578CB0097DDB9 /* WDAudioStreamer.m */; };
 		75E1C2661FC658F00097DDB9 /* WDAudioFilePreprocessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2651FC658F00097DDB9 /* WDAudioFilePreprocessor.m */; };
 		75E1C2691FC65B940097DDB9 /* WDAudioLPCM.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2681FC65B940097DDB9 /* WDAudioLPCM.m */; };
-		75E1C26D1FC6779C0097DDB9 /* WDHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C26C1FC6779C0097DDB9 /* WDHTTPRequest.m */; };
+		75E1C26D1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C26C1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m */; };
 		75E1C2731FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2711FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm */; };
 /* End PBXBuildFile section */
 
@@ -88,8 +88,8 @@
 		75E1C2671FC65B940097DDB9 /* WDAudioLPCM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioLPCM.h; sourceTree = "<group>"; };
 		75E1C2681FC65B940097DDB9 /* WDAudioLPCM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioLPCM.m; sourceTree = "<group>"; };
 		75E1C26A1FC661860097DDB9 /* WDPreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDPreHeader.h; sourceTree = "<group>"; };
-		75E1C26B1FC6779C0097DDB9 /* WDHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDHTTPRequest.h; sourceTree = "<group>"; };
-		75E1C26C1FC6779C0097DDB9 /* WDHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDHTTPRequest.m; sourceTree = "<group>"; };
+		75E1C26B1FC6779C0097DDB9 /* WDSimpleHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDSimpleHTTPRequest.h; sourceTree = "<group>"; };
+		75E1C26C1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDSimpleHTTPRequest.m; sourceTree = "<group>"; };
 		75E1C2711FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WDSimpleHTTPRequest.mm; sourceTree = "<group>"; };
 		75E1C2721FC6787D0097DDB9 /* WDSimpleHTTPRequest.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WDSimpleHTTPRequest.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,8 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				75E1C26A1FC661860097DDB9 /* WDPreHeader.h */,
-				75E1C26B1FC6779C0097DDB9 /* WDHTTPRequest.h */,
-				75E1C26C1FC6779C0097DDB9 /* WDHTTPRequest.m */,
+				75E1C26B1FC6779C0097DDB9 /* WDSimpleHTTPRequest.h */,
+				75E1C26C1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m */,
 				75E1C2711FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm */,
 				75E1C2721FC6787D0097DDB9 /* WDSimpleHTTPRequest.hpp */,
 				75E1C2631FC658C60097DDB9 /* WDAudioFile.h */,
@@ -364,7 +364,7 @@
 				75E1C25A1FC5785F0097DDB9 /* WDAuidoEncoder.m in Sources */,
 				75E1C2731FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm in Sources */,
 				75E1C25D1FC5785F0097DDB9 /* WDAudioPlayer.m in Sources */,
-				75E1C26D1FC6779C0097DDB9 /* WDHTTPRequest.m in Sources */,
+				75E1C26D1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m in Sources */,
 				75E1C25E1FC5785F0097DDB9 /* WDAudioDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
