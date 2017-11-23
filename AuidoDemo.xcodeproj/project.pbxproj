@@ -27,6 +27,7 @@
 		75E1C2691FC65B940097DDB9 /* WDAudioLPCM.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2681FC65B940097DDB9 /* WDAudioLPCM.m */; };
 		75E1C26D1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C26C1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m */; };
 		75E1C2731FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2711FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm */; };
+		75E1C2781FC6B7600097DDB9 /* WDAudioFileProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2771FC6B7600097DDB9 /* WDAudioFileProvider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		75E1C26C1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDSimpleHTTPRequest.m; sourceTree = "<group>"; };
 		75E1C2711FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WDSimpleHTTPRequest.mm; sourceTree = "<group>"; };
 		75E1C2721FC6787D0097DDB9 /* WDSimpleHTTPRequest.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WDSimpleHTTPRequest.hpp; sourceTree = "<group>"; };
+		75E1C2761FC6B7600097DDB9 /* WDAudioFileProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioFileProvider.h; sourceTree = "<group>"; };
+		75E1C2771FC6B7600097DDB9 /* WDAudioFileProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioFileProvider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +217,8 @@
 				75E1C2551FC5785F0097DDB9 /* WDAudioPlayer.m */,
 				75E1C2641FC658F00097DDB9 /* WDAudioFilePreprocessor.h */,
 				75E1C2651FC658F00097DDB9 /* WDAudioFilePreprocessor.m */,
+				75E1C2761FC6B7600097DDB9 /* WDAudioFileProvider.h */,
+				75E1C2771FC6B7600097DDB9 /* WDAudioFileProvider.m */,
 			);
 			path = AudioTools;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 				75E1C25F1FC5785F0097DDB9 /* WDRecoder.m in Sources */,
 				75E1C2621FC578CB0097DDB9 /* WDAudioStreamer.m in Sources */,
 				75E1C20F1FC570640097DDB9 /* main.m in Sources */,
+				75E1C2781FC6B7600097DDB9 /* WDAudioFileProvider.m in Sources */,
 				75E1C2011FC570640097DDB9 /* AppDelegate.m in Sources */,
 				75E1C2661FC658F00097DDB9 /* WDAudioFilePreprocessor.m in Sources */,
 				75E1C25A1FC5785F0097DDB9 /* WDAuidoEncoder.m in Sources */,
