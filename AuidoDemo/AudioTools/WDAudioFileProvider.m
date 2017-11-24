@@ -123,21 +123,259 @@ static BOOL gLastProviderIsFinished = NO;
 }
 - (NSString *)sha256
 {
-    WDLOG(@"not supported sha256");
-    return nil;
+    if (_sha256 == nil &&
+        [WDAudioStreamer options] & WDAudioStreamerRequireSHA256 &&
+        [self mappedData] != nil) {
+        unsigned char hash[CC_SHA256_DIGEST_LENGTH];
+        CC_SHA256([[self mappedData] bytes], (CC_LONG)[[self mappedData] length], hash);
+        
+        NSMutableString *result = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+        for (size_t i = 0; i < CC_SHA256_DIGEST_LENGTH; ++i) {
+            [result appendFormat:@"%02x", hash[i]];
+        }
+        
+        _sha256 = [result copy];
+    }
+    
+    return _sha256;
 }
 @end
 
 
 @implementation _WDRemoteAudioFileProvider
 @synthesize finished = _requestCompleted;
+
+- (instancetype)_initWithAudioFile:(id <WDAudioFile>)audioFile
+{
+    self = [super _initWithAudioFile:audioFile];
+    if (self) {
+        _audioFileURL = [audioFile audioFileURL];
+        if ([audioFile respondsToSelector:@selector(audioFileHost)]) {
+            _audioFileHost = [audioFile audioFileHost];
+        }
+        
+        if ([WDAudioStreamer options] & WDAudioStreamerRequireSHA256) {
+            _sha256Ctx = (CC_SHA256_CTX *)malloc(sizeof(CC_SHA256_CTX));
+            CC_SHA256_Init(_sha256Ctx);
+        }
+        
+        [self _openAudioFileStream];
+        [self _createRequest];
+        [_httpRequest start];
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    @synchronized(_httpRequest) {
+        [_httpRequest setCompletedBlock:NULL];
+        [_httpRequest setProgressBlock:NULL];
+        [_httpRequest setDidReceiveResponseBlock:NULL];
+        [_httpRequest setDidReceiveDataBlock:NULL];
+        
+        [_httpRequest cancel];
+    }
+    
+    if (_sha256Ctx != NULL) {
+        free(_sha256Ctx);
+    }
+    
+    [self _closeAudioFileStream];
+    
+    if ([WDAudioStreamer options] & WDAudioStreamerRemoveCacheOnDeallocation) {
+        [[NSFileManager defaultManager] removeItemAtPath:_cachedPath error:NULL];
+    }
+}
+
++ (NSString *)_sha256ForAudioFileURL:(NSURL *)audioFileURL
+{
+    NSString *string = [audioFileURL absoluteString];
+    unsigned char hash[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256([string UTF8String], (CC_LONG)[string lengthOfBytesUsingEncoding:NSUTF8StringEncoding], hash);
+    
+    NSMutableString *result = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    for (size_t i = 0; i < CC_SHA256_DIGEST_LENGTH; ++i) {
+        [result appendFormat:@"%02x", hash[i]];
+    }
+    
+    return result;
+}
+
++ (NSString *)_cachedPathForAudioFileURL:(NSURL *)audioFileURL
+{
+    NSString *filename = [NSString stringWithFormat:@"douas-%@.tmp", [self _sha256ForAudioFileURL:audioFileURL]];
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:filename];
+}
+
+- (void)_invokeEventBlock
+{
+    if (_eventBlock != NULL) {
+        _eventBlock();
+    }
+}
+
+- (void)_requestDidComplete
+{
+    if ([_httpRequest isFailed] ||
+        !([_httpRequest statusCode] >= 200 && [_httpRequest statusCode] < 300)) {
+        _failed = YES;
+    }
+    else {
+        _requestCompleted = YES;
+        [_mappedData wd_synchronizeMappedFile];
+    }
+    
+    if (!_failed &&
+        _sha256Ctx != NULL) {
+        unsigned char hash[CC_SHA256_DIGEST_LENGTH];
+        CC_SHA256_Final(hash, _sha256Ctx);
+        
+        NSMutableString *result = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+        for (size_t i = 0; i < CC_SHA256_DIGEST_LENGTH; ++i) {
+            [result appendFormat:@"%02x", hash[i]];
+        }
+        
+        _sha256 = [result copy];
+    }
+    
+    if (gHintFile != nil &&
+        gHintProvider == nil) {
+        gHintProvider = [[[self class] alloc] _initWithAudioFile:gHintFile];
+    }
+    
+    [self _invokeEventBlock];
+}
+
+- (void)_requestDidReportProgress:(double)progress
+{
+    [self _invokeEventBlock];
+}
+
+- (void)_requestDidReceiveResponse
+{
+    _expectedLength = [_httpRequest responseContentLength];
+    
+    _cachedPath = [[self class] _cachedPathForAudioFileURL:_audioFileURL];
+    _cachedURL = [NSURL fileURLWithPath:_cachedPath];
+    
+    [[NSFileManager defaultManager] createFileAtPath:_cachedPath contents:nil attributes:nil];
+#if TARGET_OS_IPHONE
+    [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey: NSFileProtectionNone}
+                                     ofItemAtPath:_cachedPath
+                                            error:NULL];
+#endif /* TARGET_OS_IPHONE */
+    [[NSFileHandle fileHandleForWritingAtPath:_cachedPath] truncateFileAtOffset:_expectedLength];
+    
+    _mimeType = [[_httpRequest responseHeaders] objectForKey:@"Content-Type"];
+    
+    _mappedData = [NSData wd_modifiableDataWithMappedContentsOfFile:_cachedPath];
+}
+
+- (void)_requestDidReceiveData:(NSData *)data
+{
+    if (_mappedData == nil) {
+        return;
+    }
+    
+    NSUInteger availableSpace = _expectedLength - _receivedLength;
+    NSUInteger bytesToWrite = MIN(availableSpace, [data length]);
+    
+    memcpy((uint8_t *)[_mappedData bytes] + _receivedLength, [data bytes], bytesToWrite);
+    _receivedLength += bytesToWrite;
+    
+    if (_sha256Ctx != NULL) {
+        CC_SHA256_Update(_sha256Ctx, [data bytes], (CC_LONG)[data length]);
+    }
+    
+    if (!_readyToProducePackets && !_failed && !_requiresCompleteFile) {
+        OSStatus status = kAudioFileStreamError_UnsupportedFileType;
+        
+        if (_audioFileStreamID != NULL) {
+            status = AudioFileStreamParseBytes(_audioFileStreamID,
+                                               (UInt32)[data length],
+                                               [data bytes],
+                                               0);
+        }
+        
+        if (status != noErr && status != kAudioFileStreamError_NotOptimized) {
+            NSArray *fallbackTypeIDs = [self _fallbackTypeIDs];
+            for (NSNumber *typeIDNumber in fallbackTypeIDs) {
+                AudioFileTypeID typeID = (AudioFileTypeID)[typeIDNumber unsignedLongValue];
+                [self _closeAudioFileStream];
+                [self _openAudioFileStreamWithFileTypeHint:typeID];
+                
+                if (_audioFileStreamID != NULL) {
+                    status = AudioFileStreamParseBytes(_audioFileStreamID,
+                                                       (UInt32)_receivedLength,
+                                                       [_mappedData bytes],
+                                                       0);
+                    
+                    if (status == noErr || status == kAudioFileStreamError_NotOptimized) {
+                        break;
+                    }
+                }
+            }
+            
+            if (status != noErr && status != kAudioFileStreamError_NotOptimized) {
+                _failed = YES;
+            }
+        }
+        
+        if (status == kAudioFileStreamError_NotOptimized) {
+            [self _closeAudioFileStream];
+            _requiresCompleteFile = YES;
+        }
+    }
+}
+
+- (void)_createRequest
+{
+    _httpRequest = [WDSimpleHTTPRequest requestWithURL:_audioFileURL];
+    if (_audioFileHost != nil) {
+        [_httpRequest setHost:_audioFileHost];
+    }
+    __unsafe_unretained _WDRemoteAudioFileProvider *_self = self;
+    
+    [_httpRequest setCompletedBlock:^{
+        [_self _requestDidComplete];
+    }];
+    
+    [_httpRequest setProgressBlock:^(double downloadProgress) {
+        [_self _requestDidReportProgress:downloadProgress];
+    }];
+    
+    [_httpRequest setDidReceiveResponseBlock:^{
+        [_self _requestDidReceiveResponse];
+    }];
+    
+    [_httpRequest setDidReceiveDataBlock:^(NSData *data) {
+        [_self _requestDidReceiveData:data];
+    }];
+}
+
+- (void)_handleAudioFileStreamProperty:(AudioFileStreamPropertyID)propertyID
+{
+    if (propertyID == kAudioFileStreamProperty_ReadyToProducePackets) {
+        _readyToProducePackets = YES;
+    }
+}
+
+- (void)_handleAudioFileStreamPackets:(const void *)packets
+                        numberOfBytes:(UInt32)numberOfBytes
+                      numberOfPackets:(UInt32)numberOfPackets
+                   packetDescriptions:(AudioStreamPacketDescription *)packetDescriptioins
+{
+}
+
 static void audio_file_stream_property_listener_proc(void *inClientData,
                                                      AudioFileStreamID inAudioFileStream,
                                                      AudioFileStreamPropertyID inPropertyID,
                                                      UInt32 *ioFlags)
 {
-//    __unsafe_unretained _DOUAudioRemoteFileProvider *fileProvider = (__bridge _DOUAudioRemoteFileProvider *)inClientData;
-//    [fileProvider _handleAudioFileStreamProperty:inPropertyID];
+    __unsafe_unretained _WDRemoteAudioFileProvider *fileProvider = (__bridge _WDRemoteAudioFileProvider *)inClientData;
+    [fileProvider _handleAudioFileStreamProperty:inPropertyID];
 }
 
 static void audio_file_stream_packets_proc(void *inClientData,
@@ -146,37 +384,18 @@ static void audio_file_stream_packets_proc(void *inClientData,
                                            const void *inInputData,
                                            AudioStreamPacketDescription    *inPacketDescriptions)
 {
-//    __unsafe_unretained _DOUAudioRemoteFileProvider *fileProvider = (__bridge _DOUAudioRemoteFileProvider *)inClientData;
-//    [fileProvider _handleAudioFileStreamPackets:inInputData
-//                                  numberOfBytes:inNumberBytes
-//                                numberOfPackets:inNumberPackets
-//                             packetDescriptions:inPacketDescriptions];
-}
-- (instancetype)_initWithAudioFile:(id<WDAudioFile>)audioFile
-{
-    if(self = [super _initWithAudioFile:audioFile])
-    {
-        _audioFile = audioFile;
-        _audioFileURL = [audioFile audioFileURL];
-        //
-        if([WDAudioStreamer options]&WDAudioStreamerRequireSHA256)
-        {
-            _sha256Ctx = (CC_SHA256_CTX *)malloc(sizeof(CC_SHA256_CTX));
-            CC_SHA256_Init(_sha256Ctx);
-        }
-        [self _openAudioFileStream];
-        [self _createRequest];
-        [_httpRequest start];
-        
-    }
-    return self;
+    __unsafe_unretained _WDRemoteAudioFileProvider *fileProvider = (__bridge _WDRemoteAudioFileProvider *)inClientData;
+    [fileProvider _handleAudioFileStreamPackets:inInputData
+                                  numberOfBytes:inNumberBytes
+                                numberOfPackets:inNumberPackets
+                             packetDescriptions:inPacketDescriptions];
 }
 
 - (void)_openAudioFileStream
 {
     [self _openAudioFileStreamWithFileTypeHint:0];
-    
 }
+
 - (void)_openAudioFileStreamWithFileTypeHint:(AudioFileTypeID)fileTypeHint
 {
     OSStatus status = AudioFileStreamOpen((__bridge void *)self,
@@ -189,39 +408,100 @@ static void audio_file_stream_packets_proc(void *inClientData,
         _audioFileStreamID = NULL;
     }
 }
+
 - (void)_closeAudioFileStream
 {
-    if(_audioFileStreamID){
-       AudioFileStreamClose(_audioFileStreamID);
+    if (_audioFileStreamID != NULL) {
+        AudioFileStreamClose(_audioFileStreamID);
         _audioFileStreamID = NULL;
     }
-    //取消正在进行的网络请求
-    [_httpRequest cancel];
 }
 
-- (void)_createRequest
+- (NSArray *)_fallbackTypeIDs
 {
-    _httpRequest = [WDSimpleHTTPRequest requestWithURL:_audioFileURL];
-    _httpRequest.didReceiveDataBlock = ^(NSData *data) {
-        
+    NSMutableArray *fallbackTypeIDs = [NSMutableArray array];
+    NSMutableSet *fallbackTypeIDSet = [NSMutableSet set];
+    
+    struct {
+        CFStringRef specifier;
+        AudioFilePropertyID propertyID;
+    } properties[] = {
+        { (__bridge CFStringRef)[self mimeType], kAudioFileGlobalInfo_TypesForMIMEType },
+        { (__bridge CFStringRef)[self fileExtension], kAudioFileGlobalInfo_TypesForExtension }
     };
-    _httpRequest.didReceiveResponseBlock = ^{
+    
+    const size_t numberOfProperties = sizeof(properties) / sizeof(properties[0]);
+    
+    for (size_t i = 0; i < numberOfProperties; ++i) {
+        if (properties[i].specifier == NULL) {
+            continue;
+        }
         
-    };
-    _httpRequest.completedBlock = ^{
+        UInt32 outSize = 0;
+        OSStatus status;
         
-    };
-    _httpRequest.progressBlock = ^(double downloadProgress) {
+        status = AudioFileGetGlobalInfoSize(properties[i].propertyID,
+                                            sizeof(properties[i].specifier),
+                                            &properties[i].specifier,
+                                            &outSize);
+        if (status != noErr) {
+            continue;
+        }
         
-    };
+        size_t count = outSize / sizeof(AudioFileTypeID);
+        AudioFileTypeID *buffer = (AudioFileTypeID *)malloc(outSize);
+        if (buffer == NULL) {
+            continue;
+        }
+        
+        status = AudioFileGetGlobalInfo(properties[i].propertyID,
+                                        sizeof(properties[i].specifier),
+                                        &properties[i].specifier,
+                                        &outSize,
+                                        buffer);
+        if (status != noErr) {
+            free(buffer);
+            continue;
+        }
+        
+        for (size_t j = 0; j < count; ++j) {
+            NSNumber *tid = [NSNumber numberWithUnsignedLong:buffer[j]];
+            if ([fallbackTypeIDSet containsObject:tid]) {
+                continue;
+            }
+            
+            [fallbackTypeIDs addObject:tid];
+            [fallbackTypeIDSet addObject:tid];
+        }
+        
+        free(buffer);
+    }
+    
+    return fallbackTypeIDs;
 }
 
-- (void)dealloc
+- (NSString *)fileExtension
 {
- 
+    if (_fileExtension == nil) {
+        _fileExtension = [[[[self audioFile] audioFileURL] path] pathExtension];
+    }
+    
+    return _fileExtension;
 }
 
+- (NSUInteger)downloadSpeed
+{
+    return [_httpRequest downloadSpeed];
+}
 
+- (BOOL)isReady
+{
+    if (!_requiresCompleteFile) {
+        return _readyToProducePackets;
+    }
+    
+    return _requestCompleted;
+}
 
 @end
 

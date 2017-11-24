@@ -38,6 +38,7 @@
 		75E984F41FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984EB1FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m */; };
 		75E984F51FC802C20064E3A3 /* WDAudioVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984EE1FC802C20064E3A3 /* WDAudioVisualizer.m */; };
 		75E984F61FC802C20064E3A3 /* WDEAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984EF1FC802C20064E3A3 /* WDEAGLView.m */; };
+		75E984F91FC8089B0064E3A3 /* WDAudioEventLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984F81FC8089B0064E3A3 /* WDAudioEventLoop.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,8 @@
 		75E984EE1FC802C20064E3A3 /* WDAudioVisualizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioVisualizer.m; sourceTree = "<group>"; };
 		75E984EF1FC802C20064E3A3 /* WDEAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDEAGLView.m; sourceTree = "<group>"; };
 		75E984F01FC802C20064E3A3 /* WDAudioVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioVisualizer.h; sourceTree = "<group>"; };
+		75E984F71FC8089B0064E3A3 /* WDAudioEventLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioEventLoop.h; sourceTree = "<group>"; };
+		75E984F81FC8089B0064E3A3 /* WDAudioEventLoop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioEventLoop.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +263,8 @@
 				75E984DD1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.m */,
 				75E984DF1FC802680064E3A3 /* WDAudioRenderer.h */,
 				75E984E01FC802680064E3A3 /* WDAudioRenderer.m */,
+				75E984F71FC8089B0064E3A3 /* WDAudioEventLoop.h */,
+				75E984F81FC8089B0064E3A3 /* WDAudioEventLoop.m */,
 			);
 			path = AudioTools;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				75E984F41FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m in Sources */,
 				75E1C25B1FC5785F0097DDB9 /* WDAudioPlayerItem.m in Sources */,
 				75E984DE1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.m in Sources */,
+				75E984F91FC8089B0064E3A3 /* WDAudioEventLoop.m in Sources */,
 				75E1C2871FC7B4430097DDB9 /* WDAudioStreamer+options.m in Sources */,
 				75E1C2691FC65B940097DDB9 /* WDAudioLPCM.m in Sources */,
 				75E1C25C1FC5785F0097DDB9 /* WDRecoarderSetting.m in Sources */,
