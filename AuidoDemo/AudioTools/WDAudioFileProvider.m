@@ -16,6 +16,8 @@
 #import <AudioUnit/AudioUnit.h>
 #include <CommonCrypto/CommonDigest.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "WDAudioStreamer+options.h"
+
 
 
 @interface WDAudioFileProvider()
@@ -145,16 +147,97 @@
 
 @implementation _WDRemoteAudioFileProvider
 @synthesize finished = _requestCompleted;
+static void audio_file_stream_property_listener_proc(void *inClientData,
+                                                     AudioFileStreamID inAudioFileStream,
+                                                     AudioFileStreamPropertyID inPropertyID,
+                                                     UInt32 *ioFlags)
+{
+//    __unsafe_unretained _DOUAudioRemoteFileProvider *fileProvider = (__bridge _DOUAudioRemoteFileProvider *)inClientData;
+//    [fileProvider _handleAudioFileStreamProperty:inPropertyID];
+}
+
+static void audio_file_stream_packets_proc(void *inClientData,
+                                           UInt32 inNumberBytes,
+                                           UInt32 inNumberPackets,
+                                           const void *inInputData,
+                                           AudioStreamPacketDescription    *inPacketDescriptions)
+{
+//    __unsafe_unretained _DOUAudioRemoteFileProvider *fileProvider = (__bridge _DOUAudioRemoteFileProvider *)inClientData;
+//    [fileProvider _handleAudioFileStreamPackets:inInputData
+//                                  numberOfBytes:inNumberBytes
+//                                numberOfPackets:inNumberPackets
+//                             packetDescriptions:inPacketDescriptions];
+}
 - (instancetype)_initWithAudioFile:(id<WDAudioFile>)audioFile
 {
     if(self = [super _initWithAudioFile:audioFile])
     {
         _audioFile = audioFile;
-        _cachedURL = [audioFile audioFileURL];
+        _audioFileURL = [audioFile audioFileURL];
+        //
+        if([WDAudioStreamer options]&WDAudioStreamerRequireSHA256)
+        {
+            _sha256Ctx = (CC_SHA256_CTX *)malloc(sizeof(CC_SHA256_CTX));
+            CC_SHA256_Init(_sha256Ctx);
+        }
+        [self _openAudioFileStream];
+        [self _createRequest];
+        [_httpRequest start];
         
     }
     return self;
 }
+
+- (void)_openAudioFileStream
+{
+    [self _openAudioFileStreamWithFileTypeHint:0];
+    
+}
+- (void)_openAudioFileStreamWithFileTypeHint:(AudioFileTypeID)fileTypeHint
+{
+    OSStatus status = AudioFileStreamOpen((__bridge void *)self,
+                                          audio_file_stream_property_listener_proc,
+                                          audio_file_stream_packets_proc,
+                                          fileTypeHint,
+                                          &_audioFileStreamID);
+    
+    if (status != noErr) {
+        _audioFileStreamID = NULL;
+    }
+}
+- (void)_closeAudioFileStream
+{
+    if(_audioFileStreamID){
+       AudioFileStreamClose(_audioFileStreamID);
+        _audioFileStreamID = NULL;
+    }
+    //取消正在进行的网络请求
+    [_httpRequest cancel];
+}
+
+- (void)_createRequest
+{
+    _httpRequest = [WDSimpleHTTPRequest requestWithURL:_audioFileURL];
+    _httpRequest.didReceiveDataBlock = ^(NSData *data) {
+        
+    };
+    _httpRequest.didReceiveResponseBlock = ^{
+        
+    };
+    _httpRequest.completedBlock = ^{
+        
+    };
+    _httpRequest.progressBlock = ^(double downloadProgress) {
+        
+    };
+}
+
+- (void)dealloc
+{
+ 
+}
+
+
 
 @end
 

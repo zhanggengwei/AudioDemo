@@ -29,6 +29,7 @@
 		75E1C2731FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2711FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm */; };
 		75E1C2781FC6B7600097DDB9 /* WDAudioFileProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2771FC6B7600097DDB9 /* WDAudioFileProvider.m */; };
 		75E1C2841FC7A97D0097DDB9 /* NSData+WDDataFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2831FC7A97D0097DDB9 /* NSData+WDDataFile.m */; };
+		75E1C2871FC7B4430097DDB9 /* WDAudioStreamer+options.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2861FC7B4430097DDB9 /* WDAudioStreamer+options.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,8 @@
 		75E1C2771FC6B7600097DDB9 /* WDAudioFileProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioFileProvider.m; sourceTree = "<group>"; };
 		75E1C2821FC7A97D0097DDB9 /* NSData+WDDataFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+WDDataFile.h"; sourceTree = "<group>"; };
 		75E1C2831FC7A97D0097DDB9 /* NSData+WDDataFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+WDDataFile.m"; sourceTree = "<group>"; };
+		75E1C2851FC7B4430097DDB9 /* WDAudioStreamer+options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WDAudioStreamer+options.h"; sourceTree = "<group>"; };
+		75E1C2861FC7B4430097DDB9 /* WDAudioStreamer+options.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WDAudioStreamer+options.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +205,8 @@
 				75E1C2631FC658C60097DDB9 /* WDAudioFile.h */,
 				75E1C2601FC578CB0097DDB9 /* WDAudioStreamer.h */,
 				75E1C2611FC578CB0097DDB9 /* WDAudioStreamer.m */,
+				75E1C2851FC7B4430097DDB9 /* WDAudioStreamer+options.h */,
+				75E1C2861FC7B4430097DDB9 /* WDAudioStreamer+options.m */,
 				75E1C2531FC5785F0097DDB9 /* WDAudioSession.h */,
 				75E1C24B1FC5785F0097DDB9 /* WDAudioSession.m */,
 				75E1C24C1FC5785F0097DDB9 /* WDRecoarderSetting.h */,
@@ -362,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75E1C25B1FC5785F0097DDB9 /* WDAudioPlayerItem.m in Sources */,
+				75E1C2871FC7B4430097DDB9 /* WDAudioStreamer+options.m in Sources */,
 				75E1C2691FC65B940097DDB9 /* WDAudioLPCM.m in Sources */,
 				75E1C25C1FC5785F0097DDB9 /* WDRecoarderSetting.m in Sources */,
 				75E1C2591FC5785F0097DDB9 /* WDAudioSession.m in Sources */,

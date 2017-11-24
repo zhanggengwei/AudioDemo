@@ -9,21 +9,35 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <AudioUnit/AudioUnit.h>
-//只考虑本地音频网络音频 ipods中的音频暂时忽略
+#import "WDAudioFileProvider.h"
+#import "WDAudioFile.h"
+#import "WDAudioFilePreprocessor.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "WDPreHeader.h"
+
+
 @interface WDAudioPlayerItem : NSObject
-@property (nonatomic,strong) NSString * cachePath;
-@property (nonatomic,strong) NSString * fileExtension;
-@property (nonatomic,strong) NSString * mineType;
-@property (nonatomic,assign) CGFloat  duration;
+
++ (instancetype)playbackItemWithFileProvider:(WDAudioFileProvider *)item;
+- (instancetype)initWithFileProvider:(WDAudioFileProvider *)item;
+
+@property (nonatomic, readonly) WDAudioFileProvider *fileProvider;
+@property (nonatomic, readonly) WDAudioFilePreprocessor *filePreprocessor;
+@property (nonatomic, readonly) id <WDAudioFile> audioFile;
+
+@property (nonatomic, readonly) NSURL *cachedURL;
+@property (nonatomic, readonly) NSData *mappedData;
+
+@property (nonatomic, readonly) AudioFileID fileID;
 @property (nonatomic, readonly) AudioStreamBasicDescription fileFormat;
-@end
+@property (nonatomic, readonly) NSUInteger bitRate;
+@property (nonatomic, readonly) NSUInteger dataOffset;
+@property (nonatomic, readonly) NSUInteger estimatedDuration;
 
-@interface WDAudioPlayerLocalItem : WDAudioPlayerItem
-@property (nonatomic,strong) NSURL * localURL;
-@property (nonatomic,strong) NSString * local;
-@end
+@property (nonatomic, readonly, getter=isOpened) BOOL opened;
+
+- (BOOL)open;
+- (void)close;
 
 
-@interface WDAudioPlayerRemoteItem : WDAudioPlayerItem
-@property (nonatomic,strong) NSURL * audioURL;
 @end

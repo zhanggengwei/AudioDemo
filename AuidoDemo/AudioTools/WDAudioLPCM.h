@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface WDAudioLPCM : NSObject
+@property (nonatomic, assign, getter=isEnd) BOOL end;
+- (BOOL)readBytes:(void **)bytes length:(NSUInteger *)length;
+- (void)writeBytes:(const void *)bytes length:(NSUInteger)length;
 
 @end

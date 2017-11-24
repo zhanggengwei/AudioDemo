@@ -10,5 +10,10 @@
 #import "WDAudioFilePreprocessor.h"
 
 @implementation WDAudioFilePreprocessor
+- (NSData *)handleData:(NSData *)data offset:(NSUInteger)offset
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
 
 @end
