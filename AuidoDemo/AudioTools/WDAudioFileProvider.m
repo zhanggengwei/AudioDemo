@@ -18,6 +18,9 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "WDAudioStreamer+options.h"
 
+static id <WDAudioFile> gHintFile = nil;
+static WDAudioFileProvider *gHintProvider = nil;
+static BOOL gLastProviderIsFinished = NO;
 
 
 @interface WDAudioFileProvider()
@@ -58,25 +61,6 @@
 @end
 
 @interface _WDAudioMediaLibraryFileProvider:WDAudioFileProvider
-@end
-
-
-@implementation WDAudioFileProvider
-{
-   
-}
-- (instancetype)_initWithAudioFile:(id<WDAudioFile>)audioFile
-{
-    return nil;
-}
-+ (instancetype)fileProviderWithAudioFile:(id <WDAudioFile>)audioFile
-{
-    return nil;
-}
-+ (void)setHintWithAudioFile:(id <WDAudioFile>)audioFile
-{
-    
-}
 @end
 
 
@@ -246,5 +230,126 @@ static void audio_file_stream_packets_proc(void *inClientData,
 @implementation _WDAudioMediaLibraryFileProvider
 
 @end
+
+@implementation WDAudioFileProvider
+@synthesize audioFile = _audioFile;
+@synthesize eventBlock = _eventBlock;
+@synthesize cachedPath = _cachedPath;
+@synthesize cachedURL = _cachedURL;
+@synthesize mimeType = _mimeType;
+@synthesize fileExtension = _fileExtension;
+@synthesize sha256 = _sha256;
+@synthesize mappedData = _mappedData;
+@synthesize expectedLength = _expectedLength;
+@synthesize receivedLength = _receivedLength;
+@synthesize failed = _failed;
+
++ (instancetype)_fileProviderWithAudioFile:(id <WDAudioFile>)audioFile
+{
+    if (audioFile == nil) {
+        return nil;
+    }
+    
+    NSURL *audioFileURL = [audioFile audioFileURL];
+    if (audioFileURL == nil) {
+        return nil;
+    }
+    
+    if ([audioFileURL isFileURL]) {
+        return [[_WDLocalAudioFileProvider alloc] _initWithAudioFile:audioFile];
+    }
+#if TARGET_OS_IPHONE
+    else if ([[audioFileURL scheme] isEqualToString:@"ipod-library"]) {
+        return [[_WDAudioMediaLibraryFileProvider alloc] _initWithAudioFile:audioFile];
+    }
+#endif /* TARGET_OS_IPHONE */
+    else {
+        return [[_WDRemoteAudioFileProvider alloc] _initWithAudioFile:audioFile];
+    }
+}
+
++ (instancetype)fileProviderWithAudioFile:(id <WDAudioFile>)audioFile
+{
+    if ((audioFile == gHintFile ||
+         [audioFile isEqual:gHintFile]) &&
+        gHintProvider != nil) {
+        WDAudioFileProvider *provider = gHintProvider;
+        gHintFile = nil;
+        gHintProvider = nil;
+        gLastProviderIsFinished = [provider isFinished];
+        
+        return provider;
+    }
+    
+    gHintFile = nil;
+    gHintProvider = nil;
+    gLastProviderIsFinished = NO;
+    
+    return [self _fileProviderWithAudioFile:audioFile];
+}
+
++ (void)setHintWithAudioFile:(id <WDAudioFile>)audioFile
+{
+    if (audioFile == gHintFile ||
+        [audioFile isEqual:gHintFile]) {
+        return;
+    }
+    
+    gHintFile = nil;
+    gHintProvider = nil;
+    
+    if (audioFile == nil) {
+        return;
+    }
+    
+    NSURL *audioFileURL = [audioFile audioFileURL];
+    if (audioFileURL == nil ||
+#if TARGET_OS_IPHONE
+        [[audioFileURL scheme] isEqualToString:@"ipod-library"] ||
+#endif /* TARGET_OS_IPHONE */
+        [audioFileURL isFileURL]) {
+        return;
+    }
+    
+    gHintFile = audioFile;
+    
+    if (gLastProviderIsFinished) {
+        gHintProvider = [self _fileProviderWithAudioFile:gHintFile];
+    }
+}
+
+- (instancetype)_initWithAudioFile:(id <WDAudioFile>)audioFile
+{
+    self = [super init];
+    if (self) {
+        _audioFile = audioFile;
+    }
+    
+    return self;
+}
+
+- (NSUInteger)downloadSpeed
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return 0;
+}
+
+- (BOOL)isReady
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return NO;
+}
+
+- (BOOL)isFinished
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return NO;
+}
+
+
+@end
+
+
+
 
 

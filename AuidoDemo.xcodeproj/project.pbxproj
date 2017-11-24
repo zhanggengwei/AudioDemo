@@ -30,6 +30,14 @@
 		75E1C2781FC6B7600097DDB9 /* WDAudioFileProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2771FC6B7600097DDB9 /* WDAudioFileProvider.m */; };
 		75E1C2841FC7A97D0097DDB9 /* NSData+WDDataFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2831FC7A97D0097DDB9 /* NSData+WDDataFile.m */; };
 		75E1C2871FC7B4430097DDB9 /* WDAudioStreamer+options.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1C2861FC7B4430097DDB9 /* WDAudioStreamer+options.m */; };
+		75E984DE1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984DD1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.m */; };
+		75E984E11FC802680064E3A3 /* WDAudioRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984E01FC802680064E3A3 /* WDAudioRenderer.m */; };
+		75E984F11FC802C20064E3A3 /* WDAudioAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984E31FC802C20064E3A3 /* WDAudioAnalyzer.m */; };
+		75E984F21FC802C20064E3A3 /* WDAudioAnalyzer+Default.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984E51FC802C20064E3A3 /* WDAudioAnalyzer+Default.m */; };
+		75E984F31FC802C20064E3A3 /* WDAudioSpatialAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984EA1FC802C20064E3A3 /* WDAudioSpatialAnalyzer.m */; };
+		75E984F41FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984EB1FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m */; };
+		75E984F51FC802C20064E3A3 /* WDAudioVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984EE1FC802C20064E3A3 /* WDAudioVisualizer.m */; };
+		75E984F61FC802C20064E3A3 /* WDEAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E984EF1FC802C20064E3A3 /* WDEAGLView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +109,23 @@
 		75E1C2831FC7A97D0097DDB9 /* NSData+WDDataFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+WDDataFile.m"; sourceTree = "<group>"; };
 		75E1C2851FC7B4430097DDB9 /* WDAudioStreamer+options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WDAudioStreamer+options.h"; sourceTree = "<group>"; };
 		75E1C2861FC7B4430097DDB9 /* WDAudioStreamer+options.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WDAudioStreamer+options.m"; sourceTree = "<group>"; };
+		75E984DC1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDMPMediaLibraryAssetLoader.h; sourceTree = "<group>"; };
+		75E984DD1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDMPMediaLibraryAssetLoader.m; sourceTree = "<group>"; };
+		75E984DF1FC802680064E3A3 /* WDAudioRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDAudioRenderer.h; sourceTree = "<group>"; };
+		75E984E01FC802680064E3A3 /* WDAudioRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDAudioRenderer.m; sourceTree = "<group>"; };
+		75E984E31FC802C20064E3A3 /* WDAudioAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioAnalyzer.m; sourceTree = "<group>"; };
+		75E984E41FC802C20064E3A3 /* WDAudioSpatialAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioSpatialAnalyzer.h; sourceTree = "<group>"; };
+		75E984E51FC802C20064E3A3 /* WDAudioAnalyzer+Default.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WDAudioAnalyzer+Default.m"; sourceTree = "<group>"; };
+		75E984E61FC802C20064E3A3 /* WDAudioAnalyzer_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioAnalyzer_Private.h; sourceTree = "<group>"; };
+		75E984E71FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioFrequencyAnalyzer.h; sourceTree = "<group>"; };
+		75E984E81FC802C20064E3A3 /* WDAudioAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioAnalyzer.h; sourceTree = "<group>"; };
+		75E984E91FC802C20064E3A3 /* WDAudioAnalyzer+Default.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WDAudioAnalyzer+Default.h"; sourceTree = "<group>"; };
+		75E984EA1FC802C20064E3A3 /* WDAudioSpatialAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioSpatialAnalyzer.m; sourceTree = "<group>"; };
+		75E984EB1FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioFrequencyAnalyzer.m; sourceTree = "<group>"; };
+		75E984ED1FC802C20064E3A3 /* WDEAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDEAGLView.h; sourceTree = "<group>"; };
+		75E984EE1FC802C20064E3A3 /* WDAudioVisualizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDAudioVisualizer.m; sourceTree = "<group>"; };
+		75E984EF1FC802C20064E3A3 /* WDEAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDEAGLView.m; sourceTree = "<group>"; };
+		75E984F01FC802C20064E3A3 /* WDAudioVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDAudioVisualizer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +222,8 @@
 		75E1C24A1FC5785F0097DDB9 /* AudioTools */ = {
 			isa = PBXGroup;
 			children = (
+				75E984E21FC802C20064E3A3 /* analy */,
+				75E984EC1FC802C20064E3A3 /* view */,
 				75E1C26A1FC661860097DDB9 /* WDPreHeader.h */,
 				75E1C26B1FC6779C0097DDB9 /* WDSimpleHTTPRequest.h */,
 				75E1C26C1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m */,
@@ -229,8 +256,39 @@
 				75E1C2771FC6B7600097DDB9 /* WDAudioFileProvider.m */,
 				75E1C2821FC7A97D0097DDB9 /* NSData+WDDataFile.h */,
 				75E1C2831FC7A97D0097DDB9 /* NSData+WDDataFile.m */,
+				75E984DC1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.h */,
+				75E984DD1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.m */,
+				75E984DF1FC802680064E3A3 /* WDAudioRenderer.h */,
+				75E984E01FC802680064E3A3 /* WDAudioRenderer.m */,
 			);
 			path = AudioTools;
+			sourceTree = "<group>";
+		};
+		75E984E21FC802C20064E3A3 /* analy */ = {
+			isa = PBXGroup;
+			children = (
+				75E984E31FC802C20064E3A3 /* WDAudioAnalyzer.m */,
+				75E984E41FC802C20064E3A3 /* WDAudioSpatialAnalyzer.h */,
+				75E984E51FC802C20064E3A3 /* WDAudioAnalyzer+Default.m */,
+				75E984E61FC802C20064E3A3 /* WDAudioAnalyzer_Private.h */,
+				75E984E71FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.h */,
+				75E984E81FC802C20064E3A3 /* WDAudioAnalyzer.h */,
+				75E984E91FC802C20064E3A3 /* WDAudioAnalyzer+Default.h */,
+				75E984EA1FC802C20064E3A3 /* WDAudioSpatialAnalyzer.m */,
+				75E984EB1FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m */,
+			);
+			path = analy;
+			sourceTree = "<group>";
+		};
+		75E984EC1FC802C20064E3A3 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				75E984ED1FC802C20064E3A3 /* WDEAGLView.h */,
+				75E984EE1FC802C20064E3A3 /* WDAudioVisualizer.m */,
+				75E984EF1FC802C20064E3A3 /* WDEAGLView.m */,
+				75E984F01FC802C20064E3A3 /* WDAudioVisualizer.h */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,24 +424,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75E984F41FC802C20064E3A3 /* WDAudioFrequencyAnalyzer.m in Sources */,
 				75E1C25B1FC5785F0097DDB9 /* WDAudioPlayerItem.m in Sources */,
+				75E984DE1FC8016C0064E3A3 /* WDMPMediaLibraryAssetLoader.m in Sources */,
 				75E1C2871FC7B4430097DDB9 /* WDAudioStreamer+options.m in Sources */,
 				75E1C2691FC65B940097DDB9 /* WDAudioLPCM.m in Sources */,
 				75E1C25C1FC5785F0097DDB9 /* WDRecoarderSetting.m in Sources */,
 				75E1C2591FC5785F0097DDB9 /* WDAudioSession.m in Sources */,
 				75E1C2041FC570640097DDB9 /* ViewController.m in Sources */,
 				75E1C2841FC7A97D0097DDB9 /* NSData+WDDataFile.m in Sources */,
+				75E984F11FC802C20064E3A3 /* WDAudioAnalyzer.m in Sources */,
 				75E1C25F1FC5785F0097DDB9 /* WDRecoder.m in Sources */,
 				75E1C2621FC578CB0097DDB9 /* WDAudioStreamer.m in Sources */,
 				75E1C20F1FC570640097DDB9 /* main.m in Sources */,
 				75E1C2781FC6B7600097DDB9 /* WDAudioFileProvider.m in Sources */,
+				75E984F61FC802C20064E3A3 /* WDEAGLView.m in Sources */,
+				75E984E11FC802680064E3A3 /* WDAudioRenderer.m in Sources */,
 				75E1C2011FC570640097DDB9 /* AppDelegate.m in Sources */,
+				75E984F31FC802C20064E3A3 /* WDAudioSpatialAnalyzer.m in Sources */,
 				75E1C2661FC658F00097DDB9 /* WDAudioFilePreprocessor.m in Sources */,
 				75E1C25A1FC5785F0097DDB9 /* WDAuidoEncoder.m in Sources */,
+				75E984F51FC802C20064E3A3 /* WDAudioVisualizer.m in Sources */,
 				75E1C2731FC6787D0097DDB9 /* WDSimpleHTTPRequest.mm in Sources */,
 				75E1C25D1FC5785F0097DDB9 /* WDAudioPlayer.m in Sources */,
 				75E1C26D1FC6779C0097DDB9 /* WDSimpleHTTPRequest.m in Sources */,
 				75E1C25E1FC5785F0097DDB9 /* WDAudioDecoder.m in Sources */,
+				75E984F21FC802C20064E3A3 /* WDAudioAnalyzer+Default.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
