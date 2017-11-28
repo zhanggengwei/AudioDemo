@@ -538,6 +538,7 @@ static OSStatus property_listener_default_output_device(AudioObjectID inObjectID
   if (_outputAudioUnit == NULL) {
     return;
   }
+  NSLog(@"change volume");
 
   volume = fmin(fmax(volume, 0.0), 1.0);
   AudioUnitSetParameter(_outputAudioUnit, kHALOutputParam_Volume, kAudioUnitScope_Output, 1, volume, 0);
